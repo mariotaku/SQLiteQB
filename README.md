@@ -1,4 +1,4 @@
-=SQLiteQB=
+# SQLiteQB
 
 Make a contract with me and become a magical coder!
 
