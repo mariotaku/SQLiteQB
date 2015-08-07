@@ -8,6 +8,7 @@ public abstract class DataType implements SQLLang {
     public static final String NULL = NULL().getSQL();
     public static final String REAL = REAL().getSQL();
     public static final String INTEGER = INTEGER().getSQL();
+    public static final String INTEGER_PRIMARY_KEY = INTEGER_PRIMARY_KEY().getSQL();
     public static final String TEXT = TEXT().getSQL();
     public static final String BLOB = BLOB().getSQL();
 
@@ -34,6 +35,15 @@ public abstract class DataType implements SQLLang {
             @Override
             public String getSQL() {
                 return "INTEGER";
+            }
+        };
+    }
+
+    public static DataType INTEGER_PRIMARY_KEY() {
+        return new DataType() {
+            @Override
+            public String getSQL() {
+                return "INTEGER PRIMARY KEY";
             }
         };
     }
