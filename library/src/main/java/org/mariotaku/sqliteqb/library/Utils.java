@@ -33,6 +33,16 @@ public class Utils {
         return builder.toString();
     }
 
+    public static String toStringForSQL(final int size) {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            if (i > 0) {
+                builder.append(',');
+            }
+            builder.append('?');
+        }
+        return builder.toString();
+    }
     private static String objectToString(Object o) {
         if (o instanceof SQLLang)
             return ((SQLLang) o).getSQL();
