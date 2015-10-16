@@ -118,6 +118,14 @@ public class Expression implements SQLLang {
         return new Expression(String.format(Locale.ROOT, "%s = ?", l));
     }
 
+    public static Expression inArgs(String l, int argsSize) {
+        return inArgs(new Column(l), argsSize);
+    }
+
+    public static Expression inArgs(Column c, int argsSize) {
+        return in(c, new ArgsArray(argsSize));
+    }
+
     public static Expression isNull(Column column) {
         return new Expression(String.format(Locale.ROOT, "%s IS NULL", column.getSQL()));
     }
