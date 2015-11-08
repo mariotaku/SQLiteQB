@@ -69,7 +69,7 @@ public class Columns implements Selectable {
         private final String sql, alias;
 
         public Column(final String sql) {
-            this(null, sql, null);
+            this(sql, null);
         }
 
         public Column(final String sql, final String alias) {
