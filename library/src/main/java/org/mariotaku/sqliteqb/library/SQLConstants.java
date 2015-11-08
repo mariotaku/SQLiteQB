@@ -5,11 +5,7 @@ package org.mariotaku.sqliteqb.library;
  */
 public class SQLConstants {
 
-    public SQLLang NULL() {
-        return new RawSQLLang("NULL");
-    }
+    public static SQLLang NULL = new RawSQLLang("NULL");
+    public static SQLLang EMPTY = new RawSQLLang("''");
 
-    public SQLLang EMPTY() {
-        return new RawSQLLang("''");
-    }
 }
