@@ -66,15 +66,20 @@ public class Columns implements Selectable {
 
     public static class Column extends AbsColumn {
 
-        private final Table table;
-        private final String columnName, alias;
+        private final String sql, alias;
 
-        public Column(final String columnName) {
-            this(null, columnName, null);
+        public Column(final String sql) {
+            this(null, sql, null);
         }
 
-        public Column(final String columnName, final String alias) {
-            this(null, columnName, alias);
+        public Column(final String sql, final String alias) {
+            this.sql = sql;
+            this.alias = alias;
+        }
+
+        public Column(final SQLLang sql, final String alias) {
+            this.sql = sql.getSQL();
+            this.alias = alias;
         }
 
         public Column(final Table table, final String columnName) {
@@ -82,16 +87,13 @@ public class Columns implements Selectable {
         }
 
         public Column(final Table table, final String columnName, final String alias) {
-            if (columnName == null) throw new IllegalArgumentException("");
-            this.table = table;
-            this.columnName = columnName;
-            this.alias = alias;
+            this(table.getSQL() + "." + columnName, alias);
         }
 
         @Override
         public String getSQL() {
-            final String col = table != null ? table.getSQL() + "." + columnName : columnName;
-            return alias != null ? col + " AS " + alias : col;
+            if (alias == null) return sql;
+            return sql + " AS " + alias;
         }
     }
 
