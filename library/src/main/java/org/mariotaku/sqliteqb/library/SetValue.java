@@ -16,8 +16,6 @@
 
 package org.mariotaku.sqliteqb.library;
 
-import java.util.Locale;
-
 /**
  * Created by mariotaku on 14-8-7.
  */
@@ -38,6 +36,6 @@ public class SetValue implements SQLLang {
 
     @Override
     public String getSQL() {
-        return String.format(Locale.ROOT, "%s = %s", column.getSQL(), expression.getSQL());
+        return Utils.format("%s = %s", column.getSQL(), expression.getSQL());
     }
 }

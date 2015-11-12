@@ -23,8 +23,6 @@ import org.mariotaku.sqliteqb.library.SQLQuery;
 import org.mariotaku.sqliteqb.library.Table;
 import org.mariotaku.sqliteqb.library.Utils;
 
-import java.util.Locale;
-
 /**
  * Created by mariotaku on 14-8-6.
  */
@@ -92,16 +90,16 @@ public class SQLCreateTriggerQuery implements SQLQuery {
         sb.append(event.getSQL());
         sb.append(' ');
         if (event == Event.UPDATE) {
-            sb.append(String.format(Locale.ROOT, "%s ", updateOf.getSQL()));
+            sb.append(Utils.format("%s ", updateOf.getSQL()));
         }
-        sb.append(String.format(Locale.ROOT, "ON %s ", on.getSQL()));
+        sb.append(Utils.format("ON %s ", on.getSQL()));
         if (forEachRow) {
             sb.append("FOR EACH ROW ");
         }
         if (when != null) {
-            sb.append(String.format(Locale.ROOT, "WHEN %s ", when.getSQL()));
+            sb.append(Utils.format("WHEN %s ", when.getSQL()));
         }
-        sb.append(String.format(Locale.ROOT, "BEGIN %s; END", Utils.toString(actions, ';', true)));
+        sb.append(Utils.format("BEGIN %s; END", Utils.toString(actions, ';', true)));
         return sb.toString();
     }
 

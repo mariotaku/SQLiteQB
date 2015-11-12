@@ -18,8 +18,6 @@ package org.mariotaku.sqliteqb.library;
 
 import org.mariotaku.sqliteqb.library.Columns.Column;
 
-import java.util.Locale;
-
 public class Expression implements SQLLang {
     private final String expr;
 
@@ -36,56 +34,64 @@ public class Expression implements SQLLang {
     }
 
     public static Expression equals(final Column l, final Column r) {
-        return new Expression(String.format(Locale.ROOT, "%s = %s", l.getSQL(), r.getSQL()));
+        return new Expression(Utils.format("%s = %s", l.getSQL(), r.getSQL()));
     }
 
     public static Expression equals(final Column l, final Selectable r) {
-        return new Expression(String.format(Locale.ROOT, "%s = (%s)", l.getSQL(), r.getSQL()));
+        return new Expression(Utils.format("%s = (%s)", l.getSQL(), r.getSQL()));
     }
 
     public static Expression equals(final String l, final Selectable r) {
-        return new Expression(String.format(Locale.ROOT, "%s = (%s)", l, r.getSQL()));
+        return new Expression(Utils.format("%s = (%s)", l, r.getSQL()));
     }
 
-    public static Expression equals(final Column l, final long r) {
-        return new Expression(String.format(Locale.ROOT, "%s = %d", l.getSQL(), r));
+    public static Expression equals(final Column l, final Number r) {
+        return new Expression(Utils.format("%s = %d", l.getSQL(), r));
     }
 
     public static Expression equals(final Column l, final String r) {
-        return new Expression(String.format(Locale.ROOT, "%s = '%s'", l.getSQL(), r));
+        return new Expression(Utils.format("%s = '%s'", l.getSQL(), r));
     }
 
-    public static Expression equals(final String l, final long r) {
-        return new Expression(String.format(Locale.ROOT, "%s = %d", l, r));
+    public static Expression equals(final String l, final Number r) {
+        return new Expression(Utils.format("%s = %d", l, r));
     }
 
-    public static Expression greaterThan(final String l, final long r) {
-        return new Expression(String.format(Locale.ROOT, "%s > %d", l, r));
+    public static Expression greaterThan(final String l, final Number r) {
+        return new Expression(Utils.format("%s > %d", l, r));
     }
 
 
-    public static Expression greaterEquals(final String l, final long r) {
-        return new Expression(String.format(Locale.ROOT, "%s >= %d", l, r));
+    public static Expression greaterEquals(final String l, final Number r) {
+        return new Expression(Utils.format("%s >= %d", l, r));
     }
 
-    public static Expression lesserEquals(final String l, final long r) {
-        return new Expression(String.format(Locale.ROOT, "%s <= %d", l, r));
+    public static Expression lesserEquals(final String l, final Number r) {
+        return new Expression(Utils.format("%s <= %d", l, r));
     }
 
-    public static Expression lesserThan(final String l, final long r) {
-        return new Expression(String.format(Locale.ROOT, "%s < %d", l, r));
+    public static Expression lesserThan(final String l, final Number r) {
+        return new Expression(Utils.format("%s < %d", l, r));
     }
 
     public static Expression in(final Column column, final Selectable in) {
         return new Expression(String.format("%s IN(%s)", column.getSQL(), in.getSQL()));
     }
 
-    public static Expression notEquals(final String l, final long r) {
-        return new Expression(String.format(Locale.ROOT, "%s != %d", l, r));
+    public static Expression notEquals(final String l, final Number r) {
+        return new Expression(Utils.format("%s != %d", l, r));
     }
 
     public static Expression notEquals(final String l, final String r) {
         return new Expression(String.format("%s != %s", l, r));
+    }
+
+    public static Expression isNot(final String l, final String r) {
+        return new Expression(String.format("%s IS NOT %s", l, r));
+    }
+
+    public static Expression isNot(final String l, final Number r) {
+        return new Expression(Utils.format("%s IS NOT %d", l, r));
     }
 
     public static Expression notIn(final Column column, final Selectable in) {
@@ -115,7 +121,7 @@ public class Expression implements SQLLang {
     }
 
     public static Expression equalsArgs(String l) {
-        return new Expression(String.format(Locale.ROOT, "%s = ?", l));
+        return new Expression(Utils.format("%s = ?", l));
     }
 
     public static Expression inArgs(String l, int argsSize) {
@@ -127,25 +133,25 @@ public class Expression implements SQLLang {
     }
 
     public static Expression isNull(Column column) {
-        return new Expression(String.format(Locale.ROOT, "%s IS NULL", column.getSQL()));
+        return new Expression(Utils.format("%s IS NULL", column.getSQL()));
     }
 
     public static Expression greaterThan(Column column1, Column column2) {
-        return new Expression(String.format(Locale.ROOT, "%s > %s", column1.getSQL(), column2.getSQL()));
+        return new Expression(Utils.format("%s > %s", column1.getSQL(), column2.getSQL()));
     }
 
     public static Expression likeRaw(final Column column, final String pattern, final String escape) {
-        return new Expression(String.format(Locale.ROOT, "%s LIKE %s ESCAPE '%s'", column.getSQL(), pattern, escape));
+        return new Expression(Utils.format("%s LIKE %s ESCAPE '%s'", column.getSQL(), pattern, escape));
     }
 
 
     public static Expression like(final Column column, final SQLLang expression) {
-        return new Expression(String.format(Locale.ROOT, "%s LIKE %s", column.getSQL(), expression.getSQL()));
+        return new Expression(Utils.format("%s LIKE %s", column.getSQL(), expression.getSQL()));
     }
 
 
     public static Expression likeRaw(final Column column, final String pattern) {
-        return new Expression(String.format(Locale.ROOT, "%s LIKE %s", column.getSQL(), pattern));
+        return new Expression(Utils.format("%s LIKE %s", column.getSQL(), pattern));
     }
 
 
