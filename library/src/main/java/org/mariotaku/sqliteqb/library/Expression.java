@@ -94,6 +94,10 @@ public class Expression implements SQLLang {
         return new Expression(Utils.format("%s IS NOT %d", l, r));
     }
 
+    public static Expression isNotArgs(final String l) {
+        return new Expression(Utils.format("%s IS NOT ?", l));
+    }
+
     public static Expression notIn(final Column column, final Selectable in) {
         return new Expression(String.format("%s NOT IN(%s)", column.getSQL(), in.getSQL()));
     }
