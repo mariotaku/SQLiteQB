@@ -39,18 +39,18 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
         final int size = internalQueries.size();
         for (int i = 0; i < size; i++) {
             if (i != 0) {
-                sb.append("UNION ");
+                sb.append(" UNION ");
             }
             final InternalQuery query = internalQueries.get(i);
             sb.append(query.getSQL());
         }
         if (orderBy != null) {
-            sb.append(String.format("ORDER BY %s ", orderBy.getSQL()));
+            sb.append(String.format(" ORDER BY %s", orderBy.getSQL()));
         }
         if (limit != null) {
-            sb.append(String.format("LIMIT %s ", limit));
+            sb.append(String.format(" LIMIT %s", limit));
             if (offset != null) {
-                sb.append(String.format("OFFSET %s ", offset));
+                sb.append(String.format(" OFFSET %s", offset));
             }
         }
         return sb.toString();
