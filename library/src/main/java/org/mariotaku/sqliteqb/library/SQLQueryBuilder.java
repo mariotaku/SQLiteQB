@@ -16,18 +16,7 @@
 
 package org.mariotaku.sqliteqb.library;
 
-import org.mariotaku.sqliteqb.library.query.SQLAlterTableQuery;
-import org.mariotaku.sqliteqb.library.query.SQLCreateIndexQuery;
-import org.mariotaku.sqliteqb.library.query.SQLCreateTableQuery;
-import org.mariotaku.sqliteqb.library.query.SQLCreateTriggerQuery;
-import org.mariotaku.sqliteqb.library.query.SQLCreateViewQuery;
-import org.mariotaku.sqliteqb.library.query.SQLDeleteQuery;
-import org.mariotaku.sqliteqb.library.query.SQLDropTableQuery;
-import org.mariotaku.sqliteqb.library.query.SQLDropTriggerQuery;
-import org.mariotaku.sqliteqb.library.query.SQLDropViewQuery;
-import org.mariotaku.sqliteqb.library.query.SQLInsertQuery;
-import org.mariotaku.sqliteqb.library.query.SQLSelectQuery;
-import org.mariotaku.sqliteqb.library.query.SQLUpdateQuery;
+import org.mariotaku.sqliteqb.library.query.*;
 
 public class SQLQueryBuilder {
 
@@ -113,5 +102,9 @@ public class SQLQueryBuilder {
 
     public static SQLSelectQuery.Builder select(final Selectable select) {
         return select(false, select);
+    }
+
+    public static SQLWithSelectQuery.Builder with(String name, Selectable as) {
+        return new SQLWithSelectQuery.Builder().with(name, as);
     }
 }

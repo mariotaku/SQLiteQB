@@ -16,13 +16,7 @@
 
 package org.mariotaku.sqliteqb.library.query;
 
-import org.mariotaku.sqliteqb.library.Expression;
-import org.mariotaku.sqliteqb.library.Join;
-import org.mariotaku.sqliteqb.library.OrderBy;
-import org.mariotaku.sqliteqb.library.SQLLang;
-import org.mariotaku.sqliteqb.library.SQLQuery;
-import org.mariotaku.sqliteqb.library.SQLQueryException;
-import org.mariotaku.sqliteqb.library.Selectable;
+import org.mariotaku.sqliteqb.library.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,9 +105,9 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
         initCurrentQuery();
     }
 
-    public static final class Builder implements IBuilder<SQLSelectQuery> {
+    public static class Builder implements IBuilder<SQLSelectQuery> {
         private final SQLSelectQuery query = new SQLSelectQuery();
-        private boolean buildCalled;
+        boolean buildCalled;
 
         @Override
         public SQLSelectQuery build() {
@@ -193,7 +187,7 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
             return this;
         }
 
-        private void checkNotBuilt() {
+        void checkNotBuilt() {
             if (buildCalled) throw new IllegalStateException();
         }
 
@@ -209,30 +203,38 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
         @Override
         public String getSQL() {
             if (select == null) throw new SQLQueryException("selectable is null");
-            final StringBuilder sb = new StringBuilder("SELECT ");
+            final StringBuilder sb = new StringBuilder("SELECT");
             if (distinct) {
-                sb.append("DISTINCT ");
+                sb.append(" DISTINCT");
             }
-            sb.append(String.format("%s ", select.getSQL()));
+            sb.append(" ");
+            sb.append(select.getSQL());
             if (!(select instanceof SQLSelectQuery) && from == null)
                 throw new SQLQueryException("FROM not specified");
             else if (from != null) {
                 if (from instanceof SQLSelectQuery) {
-                    sb.append(String.format("FROM (%s) ", from.getSQL()));
+                    sb.append(" FROM (");
+                    sb.append(from.getSQL());
+                    sb.append(")");
                 } else {
-                    sb.append(String.format("FROM %s ", from.getSQL()));
+                    sb.append(" FROM ");
+                    sb.append(from.getSQL());
                 }
             }
             if (join != null) {
-                sb.append(String.format("%s ", join.getSQL()));
+                sb.append(" ");
+                sb.append(join.getSQL());
             }
             if (where != null) {
-                sb.append(String.format("WHERE %s ", where.getSQL()));
+                sb.append(" WHERE ");
+                sb.append(where.getSQL());
             }
             if (groupBy != null) {
-                sb.append(String.format("GROUP BY %s ", groupBy.getSQL()));
+                sb.append(" GROUP BY ");
+                sb.append(groupBy.getSQL());
                 if (having != null) {
-                    sb.append(String.format("HAVING %s ", having.getSQL()));
+                    sb.append(" HAVING ");
+                    sb.append(having.getSQL());
                 }
             }
             return sb.toString();

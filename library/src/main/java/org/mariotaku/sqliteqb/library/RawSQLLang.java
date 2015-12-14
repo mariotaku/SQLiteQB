@@ -19,7 +19,7 @@ package org.mariotaku.sqliteqb.library;
 /**
  * Created by mariotaku on 15/6/24.
  */
-public final class RawSQLLang implements SQLLang {
+public final class RawSQLLang implements SQLLang, Selectable {
 
     private final String statement;
 
