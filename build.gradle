@@ -1,8 +1,6 @@
-import org.gradle.api.tasks.javadoc.Javadoc
-
 allprojects {
     group = 'com.github.mariotaku.SQLiteQB'
-    version = '0.9.3'
+    version = '0.9.4'
 }
 
 buildscript {

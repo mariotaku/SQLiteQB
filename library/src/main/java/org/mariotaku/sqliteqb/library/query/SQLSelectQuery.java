@@ -45,12 +45,15 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
             sb.append(query.getSQL());
         }
         if (orderBy != null) {
-            sb.append(String.format(" ORDER BY %s", orderBy.getSQL()));
+            sb.append(" ORDER BY ");
+            sb.append(orderBy.getSQL());
         }
         if (limit != null) {
-            sb.append(String.format(" LIMIT %s", limit));
+            sb.append(" LIMIT ");
+            sb.append(limit);
             if (offset != null) {
-                sb.append(String.format(" OFFSET %s", offset));
+                sb.append(" OFFSET ");
+                sb.append(offset);
             }
         }
         return sb.toString();

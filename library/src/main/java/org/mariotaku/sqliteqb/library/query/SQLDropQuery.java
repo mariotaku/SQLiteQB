@@ -33,8 +33,15 @@ public class SQLDropQuery implements SQLQuery {
 
     @Override
     public final String getSQL() {
-        if (dropIfExists) return String.format("DROP %s IF EXISTS %s", type, target);
-        return String.format("DROP %s %s", type, target);
+        final StringBuilder sb = new StringBuilder();
+        sb.append("DROP ");
+        sb.append(type);
+        if (dropIfExists) {
+            sb.append(" IF EXISTS");
+        }
+        sb.append(" ");
+        sb.append(target);
+        return sb.toString();
     }
 
 }

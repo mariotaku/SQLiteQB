@@ -20,8 +20,6 @@ import java.util.Locale;
 
 public class Utils {
 
-    private static final Locale ROOT_LOCALE = new Locale("", "", "");
-
     public static String toString(final Object[] array, final char token, final boolean includeSpace) {
         final StringBuilder builder = new StringBuilder();
         final int length = array.length;
@@ -54,7 +52,4 @@ public class Utils {
         return o != null ? o.toString() : null;
     }
 
-    public static String format(final String format, final Object... formatArgs) {
-        return String.format(ROOT_LOCALE, format, formatArgs);
-    }
 }

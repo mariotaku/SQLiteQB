@@ -42,7 +42,9 @@ public class SQLCreateViewQuery implements SQLQuery {
         if (createIfNotExists) {
             sb.append("IF NOT EXISTS ");
         }
-        sb.append(String.format("%s AS %s", name, selectStmt.getSQL()));
+        sb.append(name);
+        sb.append(" AS ");
+        sb.append(selectStmt.getSQL());
         return sb.toString();
     }
 

@@ -19,7 +19,15 @@ package org.mariotaku.sqliteqb.library;
 public class SQLFunctions {
 
     public static String SUM(final String val) {
-        return String.format("SUM (%s)", val);
+        return "SUM (" + val + ")";
+    }
+
+    public static String MAX(final String val) {
+        return "MAX (" + val + ")";
+    }
+
+    public static String MIN(final String val) {
+        return "MIN (" + val + ")";
     }
 
     public static String COUNT() {
@@ -27,7 +35,7 @@ public class SQLFunctions {
     }
 
     public static String COUNT(final String val) {
-        return String.format("COUNT (%s)", val);
+        return "COUNT (" + val + ")";
     }
 
 }

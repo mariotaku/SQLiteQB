@@ -27,8 +27,14 @@ public class SQLDeleteQuery implements SQLQuery {
 
     @Override
     public String getSQL() {
-        if (where == null) return String.format("DELETE FROM %s", table.getSQL());
-        return String.format("DELETE FROM %S WHERE %s", table.getSQL(), where.getSQL());
+        final StringBuilder sb = new StringBuilder();
+        sb.append("DELETE FROM ");
+        sb.append(table.getSQL());
+        if (where != null) {
+            sb.append(" WHERE ");
+            sb.append(where.getSQL());
+        }
+        return sb.toString();
     }
 
     void setFrom(final Table table) {

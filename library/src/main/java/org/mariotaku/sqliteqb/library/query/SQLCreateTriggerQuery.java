@@ -16,12 +16,7 @@
 
 package org.mariotaku.sqliteqb.library.query;
 
-import org.mariotaku.sqliteqb.library.Columns;
-import org.mariotaku.sqliteqb.library.Expression;
-import org.mariotaku.sqliteqb.library.SQLLang;
-import org.mariotaku.sqliteqb.library.SQLQuery;
-import org.mariotaku.sqliteqb.library.Table;
-import org.mariotaku.sqliteqb.library.Utils;
+import org.mariotaku.sqliteqb.library.*;
 
 /**
  * Created by mariotaku on 14-8-6.
@@ -90,16 +85,23 @@ public class SQLCreateTriggerQuery implements SQLQuery {
         sb.append(event.getSQL());
         sb.append(' ');
         if (event == Event.UPDATE) {
-            sb.append(Utils.format("%s ", updateOf.getSQL()));
+            sb.append(updateOf.getSQL());
+            sb.append(' ');
         }
-        sb.append(Utils.format("ON %s ", on.getSQL()));
+        sb.append("ON ");
+        sb.append(on.getSQL());
+        sb.append(' ');
         if (forEachRow) {
-            sb.append("FOR EACH ROW ");
+            sb.append("FOR EACH ROW");
         }
         if (when != null) {
-            sb.append(Utils.format("WHEN %s ", when.getSQL()));
+            sb.append(" WHEN ");
+            sb.append(when.getSQL());
+            sb.append(' ');
         }
-        sb.append(Utils.format("BEGIN %s; END", Utils.toString(actions, ';', true)));
+        sb.append(" BEGIN ");
+        sb.append(Utils.toString(actions, ';', true));
+        sb.append("; END");
         return sb.toString();
     }
 

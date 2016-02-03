@@ -49,7 +49,13 @@ public class SQLCreateIndexQuery implements SQLQuery {
         }
         if (indexedColumns == null)
             throw new NullPointerException("Indexed columns must not be null !");
-        sb.append(String.format(" %s ON %s (%s)", indexName, table.getSQL(), indexedColumns.getSQL()));
+        sb.append(" ");
+        sb.append(indexName);
+        sb.append(" ON ");
+        sb.append(table.getSQL());
+        sb.append(" (");
+        sb.append(indexedColumns.getSQL());
+        sb.append(")");
         if (where != null) {
             sb.append(" WHERE");
             sb.append(where.getSQL());

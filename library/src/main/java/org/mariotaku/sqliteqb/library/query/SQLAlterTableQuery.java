@@ -29,8 +29,17 @@ public class SQLAlterTableQuery implements SQLQuery {
     public String getSQL() {
         if (table == null) throw new NullPointerException("table must not be null!");
         if (renameTo == null && addColumn == null) throw new NullPointerException();
-        if (renameTo != null) return String.format("ALTER TABLE %s RENAME TO %s", table, renameTo);
-        return String.format("ALTER TABLE %s ADD COLUMN %s", table, addColumn.getSQL());
+        final StringBuilder sb = new StringBuilder();
+        sb.append("ALTER TABLE ");
+        sb.append(table);
+        if (renameTo != null) {
+            sb.append(" RENAME TO ");
+            sb.append(renameTo);
+        } else if (addColumn != null) {
+            sb.append(" ADD COLUMN ");
+            sb.append(addColumn.getSQL());
+        }
+        return sb.toString();
     }
 
     void setAddColumn(final NewColumn addColumn) {

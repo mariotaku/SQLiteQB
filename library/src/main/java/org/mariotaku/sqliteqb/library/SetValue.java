@@ -36,6 +36,6 @@ public class SetValue implements SQLLang {
 
     @Override
     public String getSQL() {
-        return Utils.format("%s = %s", column.getSQL(), expression.getSQL());
+        return column.getSQL() + " = " + expression.getSQL();
     }
 }

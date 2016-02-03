@@ -44,7 +44,7 @@ public class NewColumn implements SQLLang {
     public String getSQL() {
         if (name == null || type == null)
             throw new NullPointerException("name and type must not be null!");
-        return String.format("%s %s", name, type);
+        return name + " " + type;
     }
 
     public String getType() {
