@@ -22,12 +22,24 @@ public class SQLFunctions {
         return "SUM (" + val + ")";
     }
 
+    public static SQLFunction SUM(final Selectable val) {
+        return new SQLFunction("SUM (" + val.getSQL() + ")");
+    }
+
     public static String MAX(final String val) {
         return "MAX (" + val + ")";
     }
 
+    public static SQLFunction MAX(final Selectable val) {
+        return new SQLFunction("MAX (" + val.getSQL() + ")");
+    }
+
     public static String MIN(final String val) {
         return "MIN (" + val + ")";
+    }
+
+    public static SQLFunction MIN(final Selectable val) {
+        return new SQLFunction("MIN (" + val.getSQL() + ")");
     }
 
     public static String COUNT() {
