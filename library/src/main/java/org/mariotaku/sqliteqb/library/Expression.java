@@ -61,6 +61,10 @@ public class Expression implements SQLLang {
         return new Expression(l + " > " + r);
     }
 
+    public static Expression greaterThanArgs(final String l) {
+        return new Expression(l + " > ?");
+    }
+
     public static Expression greaterThan(final SQLLang l, final SQLLang r) {
         return new Expression(l.getSQL() + " > (" + r.getSQL() + ")");
     }
@@ -69,12 +73,24 @@ public class Expression implements SQLLang {
         return new Expression(l + " >= " + r);
     }
 
+    public static Expression greaterEqualsArgs(final String l) {
+        return new Expression(l + " >= ?");
+    }
+
     public static Expression lesserEquals(final String l, final Number r) {
         return new Expression(l + " <= " + r);
     }
 
+    public static Expression lesserEqualsArgs(final String l) {
+        return new Expression(l + " <= ?");
+    }
+
     public static Expression lesserThan(final String l, final Number r) {
         return new Expression(l + " < " + r);
+    }
+
+    public static Expression lesserThanArgs(final String l) {
+        return new Expression(l + " < ?");
     }
 
     public static Expression lesserThan(final SQLLang l, final SQLLang r) {
@@ -153,20 +169,45 @@ public class Expression implements SQLLang {
         return new Expression(column1.getSQL() + " > " + column2.getSQL());
     }
 
-    public static Expression likeRaw(final Column column, final String pattern, final String escape) {
-        return new Expression(column.getSQL() + " LIKE " + pattern + " ESCAPE '" + escape + "'");
-    }
-
-
     public static Expression like(final Column column, final SQLLang expression) {
         return new Expression(column.getSQL() + " LIKE " + expression.getSQL());
     }
-
 
     public static Expression likeRaw(final Column column, final String pattern) {
         return new Expression(column.getSQL() + " LIKE " + pattern);
     }
 
+    public static Expression likeRaw(final Column column, final String pattern, final String escape) {
+        return new Expression(column.getSQL() + " LIKE " + pattern + " ESCAPE '" + escape + "'");
+    }
+
+    public static Expression likeArgs(final Column column) {
+        return new Expression(column.getSQL() + " LIKE ?");
+    }
+
+    public static Expression likeEscapeArgs(final Column column) {
+        return new Expression(column.getSQL() + " LIKE ? ESCAPE ?");
+    }
+
+    public static Expression notLike(final Column column, final SQLLang expression) {
+        return new Expression(column.getSQL() + " NOT LIKE " + expression.getSQL());
+    }
+
+    public static Expression notLikeRaw(final Column column, final String pattern) {
+        return new Expression(column.getSQL() + " NOT LIKE " + pattern);
+    }
+
+    public static Expression notLikeRaw(final Column column, final String pattern, final String escape) {
+        return new Expression(column.getSQL() + " NOT LIKE " + pattern + " ESCAPE '" + escape + "'");
+    }
+
+    public static Expression notLikeArgs(final Column column) {
+        return new Expression(column.getSQL() + " NOT LIKE ?");
+    }
+
+    public static Expression notLikeEscapeArgs(final Column column) {
+        return new Expression(column.getSQL() + " NOT LIKE ? ESCAPE ?");
+    }
 
     @Override
     public String getSQL() {
