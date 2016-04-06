@@ -153,6 +153,10 @@ public class Expression implements SQLLang {
         return new Expression(l + " = ?");
     }
 
+    public static Expression notEqualsArgs(String l) {
+        return new Expression(l + " != ?");
+    }
+
     public static Expression inArgs(String l, int argsSize) {
         return inArgs(new Column(l), argsSize);
     }

@@ -15,12 +15,43 @@
  */
 
 apply plugin: 'java'
+apply plugin: 'maven'
+
+version = '0.9.7'
 
 repositories {
+    mavenLocal()
     jcenter()
 }
 
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.tmatesoft.sqljet:sqljet:1.1.10'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+uploadArchives {
+    repositories {
+        mavenInstaller {
+            pom.version = version
+            pom.groupId = 'com.github.mariotaku'
+            pom.artifactId = rootProject.name
+        }
+    }
 }
