@@ -125,6 +125,14 @@ public class Expression implements SQLLang {
         return new Expression(column.getSQL() + " NOT IN(" + in.getSQL() + ")");
     }
 
+    public static Expression notInArgs(String l, int argsSize) {
+        return notInArgs(new Column(l), argsSize);
+    }
+
+    public static Expression notInArgs(Column c, int argsSize) {
+        return notIn(c, new ArgsArray(argsSize));
+    }
+
     public static Expression notNull(final Column column) {
         return new Expression(column.getSQL() + " NOT NULL");
     }
