@@ -72,6 +72,10 @@ public class SQLQueryBuilder {
         return new SQLDropTableQuery(dropIfExists, table);
     }
 
+    public static SQLDropIndexQuery dropIndex(final boolean dropIfExists, final String table) {
+        return new SQLDropIndexQuery(dropIfExists, table);
+    }
+
     public static SQLDropViewQuery dropView(final boolean dropIfExists, final String table) {
         return new SQLDropViewQuery(dropIfExists, table);
     }
