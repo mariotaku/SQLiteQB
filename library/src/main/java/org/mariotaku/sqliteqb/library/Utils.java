@@ -54,12 +54,7 @@ public class Utils {
         final String[] strings = new String[array.length];
         final int length = array.length;
         for (int i = 0; i < length; i++) {
-            final Object item = array[i];
-            if (item != null) {
-                strings[i] = item.toString();
-            } else {
-                strings[i] = null;
-            }
+            strings[i] = objectToString(array[i]);
         }
         return strings;
     }

@@ -17,7 +17,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-version = '0.9.11'
+version = '0.9.12'
 
 repositories {
     mavenLocal()
