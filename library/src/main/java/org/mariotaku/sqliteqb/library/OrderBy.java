@@ -27,6 +27,11 @@ public class OrderBy implements SQLLang {
         this.ascending = ascending;
     }
 
+    public OrderBy(final Columns.Column[] orderBy, final boolean[] ascending) {
+        this.orderBy = Utils.toStringArray(orderBy);
+        this.ascending = ascending;
+    }
+
     public OrderBy(final String... orderBy) {
         this(orderBy, null);
     }

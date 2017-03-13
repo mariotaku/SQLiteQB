@@ -16,8 +16,6 @@
 
 package org.mariotaku.sqliteqb.library;
 
-import java.util.Locale;
-
 public class Utils {
 
     public static String toString(final Object[] array, final char token, final boolean includeSpace) {
@@ -52,4 +50,17 @@ public class Utils {
         return o != null ? o.toString() : null;
     }
 
+    public static String[] toStringArray(Object[] array) {
+        final String[] strings = new String[array.length];
+        final int length = array.length;
+        for (int i = 0; i < length; i++) {
+            final Object item = array[i];
+            if (item != null) {
+                strings[i] = item.toString();
+            } else {
+                strings[i] = null;
+            }
+        }
+        return strings;
+    }
 }
