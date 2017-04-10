@@ -69,7 +69,7 @@ public class Expression implements SQLLang {
         return new Expression(l + " > ?");
     }
 
-    public static Expression greaterThan(Column column) {
+    public static Expression greaterThanArgs(Column column) {
         return new Expression(column.getSQL() + " > ?");
     }
 
@@ -81,12 +81,20 @@ public class Expression implements SQLLang {
         return new Expression(l + " >= ?");
     }
 
+    public static Expression greaterEqualsArgs(final Column column) {
+        return new Expression(column.getSQL() + " >= ?");
+    }
+
     public static Expression lesserEquals(final String l, final Number r) {
         return new Expression(l + " <= " + r);
     }
 
     public static Expression lesserEqualsArgs(final String l) {
         return new Expression(l + " <= ?");
+    }
+
+    public static Expression lesserEqualsArgs(final Column column) {
+        return new Expression(column.getSQL() + " <= ?");
     }
 
     public static Expression lesserThan(final String l, final Number r) {
