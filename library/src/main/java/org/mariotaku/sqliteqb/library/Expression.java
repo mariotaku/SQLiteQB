@@ -61,12 +61,16 @@ public class Expression implements SQLLang {
         return new Expression(l + " > " + r);
     }
 
+    public static Expression greaterThan(final SQLLang l, final SQLLang r) {
+        return new Expression(l.getSQL() + " > (" + r.getSQL() + ")");
+    }
+
     public static Expression greaterThanArgs(final String l) {
         return new Expression(l + " > ?");
     }
 
-    public static Expression greaterThan(final SQLLang l, final SQLLang r) {
-        return new Expression(l.getSQL() + " > (" + r.getSQL() + ")");
+    public static Expression greaterThan(Column column) {
+        return new Expression(column.getSQL() + " > ?");
     }
 
     public static Expression greaterEquals(final String l, final Number r) {
@@ -91,6 +95,10 @@ public class Expression implements SQLLang {
 
     public static Expression lesserThanArgs(final String l) {
         return new Expression(l + " < ?");
+    }
+
+    public static Expression lesserThanArgs(final Column column) {
+        return new Expression(column.getSQL() + " < ?");
     }
 
     public static Expression lesserThan(final SQLLang l, final SQLLang r) {
