@@ -27,7 +27,7 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
 
     private InternalQuery currentInternalQuery;
     private OrderBy orderBy;
-    private Integer limit = null, offset = null;
+    private SQLLang limit = null, offset = null;
 
     SQLSelectQuery() {
         initCurrentQuery();
@@ -50,10 +50,10 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
         }
         if (limit != null) {
             sb.append(" LIMIT ");
-            sb.append(limit);
+            sb.append(limit.getSQL());
             if (offset != null) {
                 sb.append(" OFFSET ");
-                sb.append(offset);
+                sb.append(offset.getSQL());
             }
         }
         return sb.toString();
@@ -84,11 +84,11 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
         currentInternalQuery.setJoin(join);
     }
 
-    void setLimit(final int limit) {
+    void setLimit(final SQLLang limit) {
         this.limit = limit;
     }
 
-    void setOffset(final int offset) {
+    void setOffset(final SQLLang offset) {
         this.offset = offset;
     }
 
@@ -141,8 +141,7 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
             return this;
         }
 
-
-        public Builder limit(final int limit) {
+        public Builder limit(final SQLLang limit) {
             checkNotBuilt();
             query.setLimit(limit);
             return this;
@@ -154,7 +153,7 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
             return this;
         }
 
-        public Builder offset(final int offset) {
+        public Builder offset(final SQLLang offset) {
             query.setOffset(offset);
             return this;
         }
