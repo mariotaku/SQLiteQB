@@ -158,7 +158,7 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
             return this;
         }
 
-        public Builder orderBy(final OrderBy orderBy) {
+        public Builder orderBy(final SQLLang orderBy) {
             checkNotBuilt();
             query.setOrderBy(orderBy);
             return this;
