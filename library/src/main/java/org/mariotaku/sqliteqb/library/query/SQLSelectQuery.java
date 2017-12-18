@@ -26,7 +26,7 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
     private final List<InternalQuery> internalQueries = new ArrayList<>();
 
     private InternalQuery currentInternalQuery;
-    private OrderBy orderBy;
+    private SQLLang orderBy;
     private SQLLang limit = null, offset = null;
 
     SQLSelectQuery() {
@@ -92,7 +92,7 @@ public class SQLSelectQuery implements SQLQuery, Selectable {
         this.offset = offset;
     }
 
-    void setOrderBy(final OrderBy orderBy) {
+    void setOrderBy(final SQLLang orderBy) {
         this.orderBy = orderBy;
     }
 
